@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="patient/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+ 
+  
+</head>
+<body>
+           <section>
+                     <div class="container mt-4 mr-2">
+            <div class="card" style="width: 75%; margin: auto;">
+                <div class="card-body">
+                    <h1 class="text-center">Bill Details</h1>
+                    <div class="mt-4">
+                        <h4>Appointment Details</h4>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>Doctor Name</th>
+                                    <td th:text="${appointment.doctor.name}">Dr. John Doe</td>
+                                </tr>
+                                <tr>
+                                    <th>Specialty</th>
+                                    <td th:text="${appointment.doctor.specialty}">Cardiologist</td>
+                                </tr>
+                                <tr>
+                                    <th>Appointment Date & Time</th>
+                                    <td th:text="${appointment.appointmentDate}" >2024-11-20</td>
+                                </tr>
+                                <tr>
+                                    <th>Appointment Status</th>
+                                    <td th:text="${appointment.status}" class="text-success fw-bold">Confirmed</td>
+                                </tr>
+                                <tr>
+                                    <th>Payment ID</th>
+                                    <td th:text="${appointment.paymentId}">PAY123456</td>
+                                </tr>
+                                <tr>
+                                <th>Payment Status:</th>
+                                <td><span class="text-success fw-bold">Paid</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Prescription Section -->
+                    <div class="mt-4 text-center">
+                        <!-- Show 'View Prescription' button only if prescription is not null -->
+                        <a th:if="${appointment.prescription != null}" 
+                            th:href="@{/patient/view_prescription/{id}(id=${appointment.appointmentId})}"
+                           
+                           class="btn btn-success btn-lg">View Prescription</a>
+                        <!-- Message if prescription is not available -->
+                        <p th:if="${appointment.prescription == null}" class="text-danger mt-2">Kindly Visit Hospital on time. Thank You !!.</p>
+                    </div>
+                    
+                    <!-- Back to Appointments Button -->
+                    <div class="text-center mt-4">
+                        <a th:href="@{/patient/booked_appointments}" class="btn btn-primary">Back to My Appointments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+             
+           </section>
+             
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="patient/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+                        <div class="container mt-5 mr-3">
+                        <div class="card" style="width: 75%; margin: auto;">
+                        <div class="card-body">
+        <h1 class="text-center">My Booked Appointments</h1>
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Doctor Name</th>
+                        <th>Specialty</th>
+                        <th>Appointment Date & Time</th>
+                         <th>Status</th>
+                        
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through appointments -->
+                    <tr th:each="appointment : ${appointments}">
+                        <td th:text="${appointment.doctor.name}">Dr. John Doe</td>
+                        <td th:text="${appointment.doctor.specialty}">Cardiologist</td>
+                        <td th:text="${appointment.appointmentDate}">2024-11-20</td>
+                          <td>
+                            <span th:text="${appointment.status}"  th:classappend="${appointment.status == 'Confirmed' ? 'text-success' : 'text-danger'}">
+                                Confirmed
+                            </span>
+                        </td>
+                        
+                        <td>
+                            <!-- Show 'View' button only if paymentId is not null -->
+                           <a th:href="@{/patient/view_bill/{id}(id=${appointment.appointmentId})}"><button class="btn btn-primary btn-sm" 
+                      th:if="${appointment.paymentId != null}">View</button></a>
+    
+                    <!-- Show 'Pay Now' button only if paymentId is null -->
+                          <a th:href="@{/patient/pay_now/{id}(id=${appointment.appointmentId})}"> <button class="btn btn-warning btn-sm" 
+                              th:if="${appointment.paymentId == null}">Pay Now</button></a>
+                            <a th:href="@{/patient/delete_appointment/{id}(id=${appointment.appointmentId})}"><button class="btn btn-danger btn-sm" >Cancel</button></a>
+                        </td>
+                    </tr>
+                    <!-- If no appointments -->
+                    <tr th:if="${#lists.isEmpty(appointments)}">
+                        <td colspan="6" class="text-center">No appointments booked.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+        <a href="/patient/home" class="btn btn-primary mt-3">Back to Dashboard</a>
+    </div>
+    </div>
+    </div>
+    </div>
+           </section>
+             
+</body>
+</html>

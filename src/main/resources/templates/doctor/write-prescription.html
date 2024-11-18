@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="doctor/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+                 <div class="container mt-5 mr-2">
+                 <div class="card" style="width: 75%; margin: auto;">
+                 <div class="card-body">
+        <h1 class="text-center">Write Prescription</h1>
+        <form th:action="@{/doctor/save_prescription}" method="post">
+            <input type="hidden" th:value="${appointment.appointmentId}" name="appointmentId">
+            <div class="card mt-4" >
+                <div class="card-body">
+                    <h4>Patient Details</h4>
+                    <p><strong>Name:</strong> <span th:text="${appointment.patient.name}">John Doe</span></p>
+                    <p><strong>Appointment Date:</strong> <span th:text="${appointment.appointmentDate}">2024-11-20</span></p>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4>Prescription</h4>
+                    <textarea class="form-control" name="prescription" rows="5" placeholder="Write prescription details here"></textarea>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4>Prescribe Medicines</h4>
+                    <div class="form-check" th:each="medicine : ${medicines}">
+                        <input class="form-check-input" type="checkbox" th:id="${'medicine-' + medicine.medId}" 
+                               th:name="medicineIds" th:value="${medicine.medId}">
+                        <label class="form-check-label" th:for="${'medicine-' + medicine.medId}" 
+                               th:text="${medicine.medName + ' - ' +'Rs.' +medicine.medPrice+'/-' }">Paracetamol - 10 $</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4>Prescribe Tests</h4>
+                    <div class="form-check" th:each="test : ${tests}">
+                        <input class="form-check-input" type="checkbox" th:id="${'test-' + test.testId}" 
+                               th:name="testIds" th:value="${test.testId}">
+                        <label class="form-check-label" th:for="${'test-' + test.testId}" 
+                               th:text="${test.testName + ' - ' +'Rs.'+ test.testPrice +'/-'}">Blood Test - 20 $</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success">Save Prescription</button>
+                <a th:href="@{/doctor/appointment_dashboard}" class="btn btn-secondary">Back to Appointments</a>
+            </div>
+        </form>
+    </div>
+    </div>
+    </div>
+                
+             
+           </section>
+             
+</body>
+</html>

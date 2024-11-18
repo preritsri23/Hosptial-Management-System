@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="admin/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+           <div class="container text-center mt-4 mr-3">
+              <div class="card" style="width: 75%; margin: auto;">
+              <div class="card-body text-center">
+        <h3 class="mt-5 text-center"><i class="fa-solid fa-users-line"></i>  Doctors List  <i class="fa-solid fa-users-line"></i></h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Specialty</th>
+                    <th scope="col">Availability Time</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="doctor : ${doctors}">
+                    <td th:text="${doctor.id}">Movie Name</td>
+                    <td th:text="${doctor.name}">Movie Name</td>
+                    <td th:text="${doctor.username}">0</td>
+                    <td th:text="${doctor.specialty}">0.0</td>
+                    <td th:text="${#strings.concat(doctor.startTime, ' - ', doctor.endTime)}"></td>
+                   <td>
+                           <a th:href="@{/admin/delete_doctor/{id}(id=${doctor.id})}"><button class="btn btn-danger">Delete</button></a>
+                   </td>
+                </tr>
+            </tbody>
+        </table>
+               <a th:href="@{/admin/new_doctor}"><button class="btn btn-info">Add New Doctor</button></a>
+        </div>
+        </div>
+    </div>
+             
+           </section>
+             
+</body>
+</html>

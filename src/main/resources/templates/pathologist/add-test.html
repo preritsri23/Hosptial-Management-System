@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="pathologist/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+           <div class="container  mt-4 mr-3">
+              <div class="card" style="width: 75%; margin: auto;">
+              <div class="card-body">
+                   <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class=" text-center mt-5">New Test Entry</h1>
+                <form method="post" th:action="@{/pathologist/do_register_test}" th:object="${test}" class="mt-4">
+                <!-- Name -->
+                    <div class="mb-3">
+                        <label for="testName" class="form-label">Enter Test Name</label>
+                        <input type="text" class="form-control" id="testName" name="testName" required>
+                    </div>
+                    <!-- test Price -->
+                    <div class="mb-3">
+                        <label for="testPrice" class="form-label">Enter Test Price</label>
+                        <input type="number" class="form-control" id="testPrice" name="testPrice" required>
+                    </div>
+                   
+
+                
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary w-100">Save</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+             
+           </section>
+             
+</body>
+</html>

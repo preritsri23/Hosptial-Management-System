@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="doctor/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+                <div class="container mt-5 mr-1">
+                <div class="card" style="width: 80%; margin: auto;">
+                <div class="card-body">
+        <h1 class="text-center">Booked Appointments</h1>
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Patient Age</th>
+                        <th>Patient's Medical History</th>
+                        <th>Appointment Date & Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through appointments and only show if status is 'Confirmed' and prescription is null -->
+                    <tr th:each="appointment : ${appointments}" 
+                        th:if="${appointment.status == 'Confirmed' and appointment.prescription == null}">
+                        <td th:text="${appointment.patient.name}">John Doe</td>
+                        <td th:text="${appointment.patient.age}">John Doe</td>
+                        <td th:text="${appointment.patient.medHistory}">John Doe</td>
+                        <td th:text="${appointment.appointmentDate}">2024-11-20</td>
+                        <td>
+                            <span class="text-success">Confirmed</span>
+                        </td>
+                        <td>
+                            <!-- Write Prescription Button -->
+                            <a 
+                               class="btn btn-primary btn-sm" th:href="@{/doctor/write_prescription/{id}(id=${appointment.appointmentId})}">
+                                Write Prescription
+                            </a>
+                        </td>
+                    </tr>
+                    <!-- If no appointments -->
+                    <tr th:if="${#lists.isEmpty(appointments)}">
+                        <td colspan="4" class="text-center">No appointments to display.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Button to View Already Prescribed Patients -->
+        <div class="text-center mt-4">
+            <a class="btn btn-secondary" th:href="@{/doctor/view_prescribed_patients}">View Prescribed Patients</a>
+        </div>
+    </div>
+    </div>
+    </div>
+           </section>
+             
+</body>
+</html>

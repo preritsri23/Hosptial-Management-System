@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="patient/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+                     <div class="container mt-5 mr-2">
+                     <div class="card mt-3">
+                     <div class="card-body" style="width: 75%; margin: auto;">
+        <h1 class="text-center">Test Portal</h1>
+        
+        <div class="card mt-4">
+            <div class="card-body" >
+                <h3>Test Prescription Details</h3>
+
+                <!-- Conditionally display table if medicines and prescription are not null -->
+                <div th:if="${appointments != null}">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" th:if="${appointments.size() > 0}">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Doctor Name</th>
+                                    <th>Appointment Date</th>
+                                    <th>Tests Prescribed</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Loop through appointments and check if prescriptions and medicines are not empty -->
+                                <tr th:each="appointment : ${appointments}" 
+                                    th:if="${appointment.tests != null and appointment.tests.size() > 0 and appointment.prescription != null}">
+                                    <td th:text="${appointment.doctor.name}">Dr. John Doe</td>
+                                    <td th:text="${appointment.appointmentDate}">2024-11-20</td>
+                                    
+                                    <td>
+                                        <ul>
+                                            <li th:each="test : ${appointment.tests}" th:text="${test.testName}">Test Name</li>
+                                        </ul>
+                                    </td>
+
+                                   <td>
+                                      <!-- Show Buy Now button if medPaymentId is null -->
+                                              <a th:if="${appointment.testPaymentId == null}" 
+                                           th:href="@{/patient/test_view_more/{id}(id=${appointment.appointmentId})}">
+                                              <button class="btn btn-success btn-sm">Buy Now</button>
+                                                </a>
+
+                               <!-- Show View Receipt button if medPaymentId is not null -->
+                                  <a th:if="${appointment.testPaymentId != null}" 
+                            th:href="@{/patient/test_reciept/{id}(id=${appointment.appointmentId})}">
+                                     <button class="btn btn-primary btn-sm">View Receipt</button>
+                                  </a>
+                                       </td>
+                                </tr>
+                                <!-- If no appointments found -->
+                                <tr th:if="${#lists.isEmpty(appointments)}">
+                                    <td colspan="4" class="text-center">No appointments found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a th:href="@{/patient/test_portal}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+    </div>
+    </div>
+    </div>
+           </section>
+             
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="patient/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+                        <div class="container mt-5 mr-3">
+            <div class="card" style="width: 75%; margin: auto;">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">Medicine Receipt</h1>
+                    
+                    <!-- Doctor and Appointment Details -->
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Prescribed By:</th>
+                                <td th:text="${appointment.doctor.name}">Dr. John Doe</td>
+                            </tr>
+                            <tr>
+                                <th>Specialty:</th>
+                                <td th:text="${appointment.doctor.specialty}">Cardiologist</td>
+                            </tr>
+                            <tr>
+                                <th>Appointment Date:</th>
+                                <td th:text="${appointment.appointmentDate}">2024-11-20</td>
+                            </tr>
+                            <tr>
+                                <th>Payment ID:</th>
+                                <td th:text="${appointment.medPaymentId}">PAY12345678</td>
+                            </tr>
+                            <tr>
+                                <th>Status:</th>
+                                <td><span class="text-success fw-bold">Paid</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <!-- Medicines Details -->
+                    <h4 class="mt-4">Prescribed Medicines</h4>
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Medicine Name</th>
+                                <th>Price (Rs)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="medicine : ${appointment.medicines}">
+                                <td th:text="${medicine.medName}">Paracetamol</td>
+                                <td th:text="${medicine.medPrice}">50</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Total Price:</th>
+                                <th th:text="${totalPrice}">500</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    
+                    <!-- Back Button -->
+                    <div class="text-center">
+                        <a href="/patient/medicine_portal" class="btn btn-primary mt-3">Back to Medicine Portal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+           </section>
+             
+</body>
+</html>

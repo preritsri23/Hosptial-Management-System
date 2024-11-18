@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="pathologist/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+<style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .info-row {
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            font-weight: bold;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+        }
+
+        .btn-back {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+
+        .card-footer {
+            background-color: #f7f7f7;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+           <section>
+                  <div class="container mt-5 mr-3 text-center">
+        <div class="card" style="width: 75%; margin: auto;">
+            <div class="card-header">
+                <h3 class="text-center">Pathologist Dashboard</h3>
+            </div>
+            <div class="card-body">
+                <!-- Patient Information -->
+                <div class="row info-row">
+                    <div class="col-md-4 info-title">Name:</div>
+                    <div class="col-md-8 info-value" th:text="${pathalogist.name}">John Doe</div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-md-4 info-title">Username:</div>
+                    <div class="col-md-8 info-value" th:text="${pathalogist.username}">30</div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-md-4 info-title">Medical Lab Num :</div>
+                    <div class="col-md-8 info-value" th:text="${pathalogist.labNum}">No known allergies or previous illnesses</div>
+                </div>
+            </div>
+            
+        </div>
+        <p class="text-success">
+        
+        
+        
+        
+        
+         Welcome to Our Portal :) Hope you like this experience. </p>
+    </div>
+             
+           </section>
+             
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="pathologist/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+           <div class="container text-center mt-4 mr-3">
+              <div class="card" style="width: 75%; margin: auto;">
+              <div class="card-body text-center">
+        <h3 class="mt-5 text-center"><i class="fa-solid fa-users-line"></i>  Tests List  <i class="fa-solid fa-users-line"></i></h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                    <th scope="col">Test Name</th>
+                    <th scope="col">Test Price</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="test : ${tests}">
+                    <td th:text="${test.testId}">Movie Name</td>
+                    <td th:text="${test.testName}">Movie Name</td>
+                    <td th:text="${test.testPrice}">0</td>
+                    
+                   <td>
+                           <a th:href="@{/pathologist/delete_test/{id}(id=${test.testId})}"><button class="btn btn-danger">Delete</button></a>
+                   </td>
+                </tr>
+            </tbody>
+        </table>
+               <a th:href="@{/pathologist/new_test}"><button class="btn btn-info">Add New Test</button></a>
+                 <a th:href="@{/pathologist/view_sales}"><button class="btn btn-danger">View Sales</button></a>
+        </div>
+        </div>
+    </div>
+             
+           </section>
+             
+</body>
+</html>

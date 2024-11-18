@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="admin/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+
+</head>
+<body>
+           <section>
+                      <div class="container mt-5 mr-3">
+                      <div class="card" style="width: 75%; margin: auto;">
+                      <div class="card-body">
+        <h1 class="text-center mb-4">Revenue Overview</h1>
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Revenue Source</th>
+                    
+                    <th scope="col">Revenue Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Appointment Revenue -->
+                <tr>
+                    <td>Appointment Revenue</td>
+                    
+                    <td th:text="${appRevenue}"></td>
+                </tr>
+                <!-- Medicine Sales -->
+                <tr>
+                    <td>Medicine Sales</td>
+                    
+                    <td th:text="${medSales}"></td>
+                </tr>
+                <!-- Test Sales -->
+                <tr>
+                    <td>Test Sales</td>
+                    
+                    <td th:text="${testSales}"></td>
+                </tr>
+            </tbody>
+          
+        </table>
+    </div>
+     <div class="text-end mt-3">
+            <!-- Total sales -->
+            <h4 class="text-center">Total Revenue: Rs. <span th:text="${totalSales}" class="text-success">500</span></h4>
+        </div>
+    </div>
+    </div>
+                     
+           </section>
+             
+</body>
+</html>

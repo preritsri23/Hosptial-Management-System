@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="doctor/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+            <div class="container mt-5 mr-3">
+            <div class="card" style="width: 75%; margin: auto;">
+            <div class="card-body">
+        <h1 class="text-center">Already Prescribed Patients</h1>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Appointment Date</th>
+                        <th>Prescription</th>
+                        <th>Medicines</th>
+                        <th>Tests</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through prescribed appointments -->
+                    <tr th:each="appointment : ${appointments}" 
+                        th:if="${appointment.prescription != null}">
+                        <td th:text="${appointment.patient.name}">John Doe</td>
+                        <td th:text="${appointment.appointmentDate}">2024-11-20</td>
+                        <td>
+                            <span th:text="${appointment.prescription}">Prescribed details...</span>
+                        </td>
+                        <td>
+                            <ul>
+                                <li th:each="medicine : ${appointment.medicines}" th:text="${medicine.medName}">Paracetamol</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li th:each="test : ${appointment.tests}" th:text="${test.testName}">Blood Test</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <!-- If no appointments -->
+                    <tr th:if="${#lists.isEmpty(appointments)}">
+                        <td colspan="5" class="text-center">No prescribed patients found.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <a th:href="@{/doctor/appointment_dashboard}" class="btn btn-primary">Back to Appointments</a>
+        </div>
+    </div>
+    </div>
+    </div>
+             
+           </section>
+             
+</body>
+</html>

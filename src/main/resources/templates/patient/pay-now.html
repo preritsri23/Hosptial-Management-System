@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="patient/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+                  <div class="container mt-5 mr-3">
+        <h3 class="text-center">Payment for Appointment</h3>
+        <div class="card " style="width: 75%; margin: auto;">
+            <div class="card-body text-center">
+                <p>Scan the QR code below to make Payment of Rs 500/-</p>
+                <!-- QR Code -->
+                <img src="/Img/qrcode.jpg" alt="QR Code" style="width: 200px; height: 200px; margin-bottom: 20px;">
+                
+                <!-- Payment ID Form -->
+                <form th:action="@{/patient/submit_payment}" method="POST">
+                    <input type="hidden" name="appointmentId" th:value="${appointment.appointmentId}">
+                    <div class="form-group mb-3">
+                        <label for="paymentId">Enter Payment ID:</label>
+                        <input type="text" class="form-control" id="paymentId" name="paymentId" placeholder="Enter Payment ID" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+             
+           </section>
+             
+</body>
+</html>

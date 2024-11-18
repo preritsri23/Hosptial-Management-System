@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="patient/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+               <div class="container mt-5">
+               <div class="card" style="width: 75%; margin: auto;">
+               <div class="card-body">
+        <h1 class="text-center">Prescription Details</h1>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>Appointment Details</h3>
+                <table class="table">
+                    <tr>
+                        <th>Patient Name</th>
+                        <td th:text="${appointment.patient.name}">John Doe</td>
+                    </tr>
+                    <tr>
+                        <th>Doctor</th>
+                        <td th:text="${appointment.doctor.name}">Dr. John Doe</td>
+                    </tr>
+                    <tr>
+                        <th>Specialty</th>
+                        <td th:text="${appointment.doctor.specialty}">Cardiologist</td>
+                    </tr>
+                    <tr>
+                        <th>Appointment Date</th>
+                        <td th:text="${appointment.appointmentDate}">2024-11-20</td>
+                    </tr>
+                </table>
+
+                <h3>Prescription</h3>
+                <p th:text="${appointment.prescription}">No prescription details available.</p>
+
+                <h3>Medicines Prescribed</h3>
+                <ul>
+                    <li th:each="medicine : ${appointment.medicines}" th:text="${medicine.medName}">Paracetamol</li>
+                </ul>
+
+                <h3>Tests Prescribed</h3>
+                <ul>
+                    <li th:each="test : ${appointment.tests}" th:text="${test.testName}">Blood Test</li>
+                </ul>
+
+                <div class="text-center mt-4">
+                    <a th:href="@{/patient/booked_appointments}" class="btn btn-primary">Back to My Appointments</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+             
+           </section>
+             
+</body>
+</html>

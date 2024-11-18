@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="patient/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+               <div class="container  mt-4 mr-3">
+              <div class="card" style="width: 75%; margin: auto;">
+              <div class="card-body">
+                   <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="  mt-2">Appointment Booking</h1>
+                   <!-- Booking Form -->
+                <form th:action="@{/patient/do_register_appointment}" method="post">
+                    <!-- Hidden Field for Doctor ID -->
+                    <input type="hidden" name="doctorId" th:value="${doctor.id}">
+                      
+                     
+                    <!-- Appointment Date -->
+                    <div class="mb-3">
+                        <label for="appointmentDate" class="form-label">Appointment Date</label>
+                        <input type="datetime-local"  id="appointmentDate" name="appointmentDate" class="form-control" required>
+                    </div>
+
+                    
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+             
+           </section>
+             
+</body>
+</html>

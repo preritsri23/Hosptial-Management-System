@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org" th:replace="patient/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>This Is Home Page</title>
+</head>
+<body>
+           <section>
+             <div class="container mt-5 mr-3">
+             <div class ="card" style="width: 75%; margin: auto;">
+             <div class="card-body">
+        <div class="mt-4">
+            <h4 class="text-center">Prescription Details</h4>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Prescribed By: </th>
+                        <td th:text="${appointment.doctor.name}">Dr. John Doe</td>
+                    </tr>
+                    <tr>
+                        <th>Appointment Date: </th>
+                        <td th:text="${appointment.appointmentDate}">2024-11-20</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="text-center">Prescribed Medicines</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Medicine Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through medicines -->
+                    <tr th:each="medicine : ${appointment.medicines}">
+                        <td th:text="${medicine.medName}">Medicine Name</td>
+                        <td th:text="${medicine.medPrice}">100</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center">
+            <h4>Total Price: <span th:text="${totalPrice}">500</span> INR</h4>
+        </div>
+
+        <h3 class="text-center mt-4">Payment for Appointment</h3>
+        <div class="card" style="width: 75%; margin: auto;">
+            <div class="card-body text-center">
+              <h4> Scan the Qr Code to make Payment Of : <span th:text="${totalPrice}">500</span> INR</h4>
+                
+                <!-- QR Code -->
+                <img src="/Img/qrcode.jpg" alt="QR Code" style="width: 200px; height: 200px; margin-bottom: 20px;">
+                
+                <!-- Payment ID Form -->
+                <form th:action="@{/patient/submit_medPayment}" method="POST">
+                    <input type="hidden" name="appointmentId" th:value="${appointment.appointmentId}">
+                    <div class="form-group mb-3">
+                        <label for="medPaymentId">Enter Payment ID:</label>
+                        <input type="text" class="form-control" id="medPaymentId" name="medPaymentId" placeholder="Enter Payment ID" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+             
+           </section>
+             
+</body>
+</html>
